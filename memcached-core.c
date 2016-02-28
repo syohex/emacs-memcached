@@ -109,7 +109,7 @@ el_memcached_set_common(emacs_env *env, memcached_st *mst,
 		return env->intern(env, "nil");
 	}
 
-	return env->make_integer(env, (intmax_t)mrt);
+	return env->intern(env, "t");
 }
 
 static emacs_value
