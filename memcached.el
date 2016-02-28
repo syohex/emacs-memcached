@@ -34,6 +34,10 @@
   (cl-assert (stringp server))
   (memcached-core-init server))
 
+(defun memcached-server-add (mst host port)
+  (cl-assert (and (stringp host) (integerp port)))
+  (memcached-core-server-add mst host port))
+
 (defun memcached-close (mst)
   (memcached-core-close mst))
 

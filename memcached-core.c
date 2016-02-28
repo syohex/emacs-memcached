@@ -73,6 +73,24 @@ Fmemcached_init(emacs_env *env, ptrdiff_t nargs, emacs_value args[], void *data)
 }
 
 static emacs_value
+Fmemcached_server_add(emacs_env *env, ptrdiff_t nargs, emacs_value args[], void *data)
+{
+	memcached_st *mst = env->get_user_ptr(env, args[0]);
+	ptrdiff_t host_len;
+	char *host = retrieve_string(env, args[1], &host_len);
+	int port = (int)env->extract_integer(env, args[2]);
+
+	memcached_return mrt = memcached_server_add(mst, host, port);
+	free(host);
+
+	if (mrt != MEMCACHED_SUCCESS) {
+		return env->intern(env, "nil");
+	}
+
+	return env->intern(env, "t");
+}
+
+static emacs_value
 Fmemcached_close(emacs_env *env, ptrdiff_t nargs, emacs_value args[], void *data)
 {
 	memcached_st *mst = env->get_user_ptr(env, args[0]);
@@ -234,6 +252,7 @@ emacs_module_init(struct emacs_runtime *ert)
 	bind_function (env, lsym, env->make_function(env, amin, amax, csym, doc, data))
 
 	DEFUN("memcached-core-init", Fmemcached_init, 1, 1, "Initialize memcached", NULL);
+	DEFUN("memcached-server-add", Fmemcached_server_add, 3, 3, "Add memcached server", NULL);
 	DEFUN("memcached-close", Fmemcached_close, 1, 1, "Close memcached connection", NULL);
 	DEFUN("memcached-core-set",  Fmemcached_set, 4, 4, "Set value", NULL);
 	DEFUN("memcached-core-add",  Fmemcached_add, 4, 4, "Add value", NULL);
