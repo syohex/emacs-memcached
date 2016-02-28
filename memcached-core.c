@@ -253,7 +253,7 @@ emacs_module_init(struct emacs_runtime *ert)
 
 	DEFUN("memcached-core-init", Fmemcached_init, 1, 1, "Initialize memcached", NULL);
 	DEFUN("memcached-server-add", Fmemcached_server_add, 3, 3, "Add memcached server", NULL);
-	DEFUN("memcached-close", Fmemcached_close, 1, 1, "Close memcached connection", NULL);
+	DEFUN("memcached-core-close", Fmemcached_close, 1, 1, "Close memcached connection", NULL);
 	DEFUN("memcached-core-set",  Fmemcached_set, 4, 4, "Set value", NULL);
 	DEFUN("memcached-core-add",  Fmemcached_add, 4, 4, "Add value", NULL);
 	DEFUN("memcached-core-get",  Fmemcached_get, 2, 2, "Get value", NULL);
