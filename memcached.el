@@ -31,24 +31,30 @@
 
 ;;;###autoload
 (defun memcached-init (server)
+  "Connect memcached `server' and return memcached state object.
+`server' is like \"localhost:11211\"."
   (cl-assert (stringp server))
   (memcached-core-init server))
 
-(defun memcached-server-add (mst host port)
+(defun memcached-server-add (state host port)
+  "Add another server to `state'."
   (cl-assert (and (stringp host) (integerp port)))
-  (memcached-core-server-add mst host port))
+  (memcached-core-server-add state host port))
 
-(defun memcached-close (mst)
-  (memcached-core-close mst))
+(defun memcached-close (state)
+  "Close connection."
+  (memcached-core-close state))
 
 (defsubst memcached--to-string (obj)
   (or (and (stringp obj) obj) (format "%s" obj)))
 
-(defun memcached-set (mst key value &optional expire)
-  (memcached-core-set mst (memcached--to-string key) (memcached--to-string value) (or expire 0)))
+(defun memcached-set (state key value &optional expire)
+  "Set data to server"
+  (memcached-core-set state (memcached--to-string key) (memcached--to-string value) (or expire 0)))
 
-(defun memcached-get (mst key)
-  (memcached-core-get mst (memcached--to-string key)))
+(defun memcached-get (state key)
+  "Get `key' object."
+  (memcached-core-get state (memcached--to-string key)))
 
 (provide 'memcached)
 

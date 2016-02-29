@@ -251,16 +251,15 @@ emacs_module_init(struct emacs_runtime *ert)
 #define DEFUN(lsym, csym, amin, amax, doc, data) \
 	bind_function (env, lsym, env->make_function(env, amin, amax, csym, doc, data))
 
-	DEFUN("memcached-core-init", Fmemcached_init, 1, 1, "Initialize memcached", NULL);
-	DEFUN("memcached-server-add", Fmemcached_server_add, 3, 3, "Add memcached server", NULL);
-	DEFUN("memcached-core-close", Fmemcached_close, 1, 1, "Close memcached connection", NULL);
-	DEFUN("memcached-core-set",  Fmemcached_set, 4, 4, "Set value", NULL);
-	DEFUN("memcached-core-add",  Fmemcached_add, 4, 4, "Add value", NULL);
-	DEFUN("memcached-core-get",  Fmemcached_get, 2, 2, "Get value", NULL);
-	DEFUN("memcached-core-delete",  Fmemcached_delete, 3, 3, "Delete value", NULL);
-	DEFUN("memcached-core-flush",  Fmemcached_flush, 2, 2, "Flush memcached", NULL);
-	DEFUN("memcached-flush-buffers",  Fmemcached_flush_buffers, 1, 1,
-	      "Flush memcached buffers", NULL);
+	DEFUN("memcached-core-init", Fmemcached_init, 1, 1, NULL, NULL);
+	DEFUN("memcached-server-add", Fmemcached_server_add, 3, 3, NULL, NULL);
+	DEFUN("memcached-core-close", Fmemcached_close, 1, 1, NULL, NULL);
+	DEFUN("memcached-core-set",  Fmemcached_set, 4, 4, NULL, NULL);
+	DEFUN("memcached-core-add",  Fmemcached_add, 4, 4, NULL, NULL);
+	DEFUN("memcached-core-get",  Fmemcached_get, 2, 2, NULL, NULL);
+	DEFUN("memcached-core-delete",  Fmemcached_delete, 3, 3, NULL, NULL);
+	DEFUN("memcached-core-flush",  Fmemcached_flush, 2, 2, NULL, NULL);
+	DEFUN("memcached-flush-buffers",  Fmemcached_flush_buffers, 1, 1, NULL, NULL);
 
 #undef DEFUN
 
