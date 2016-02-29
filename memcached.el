@@ -48,13 +48,17 @@
 (defsubst memcached--to-string (obj)
   (or (and (stringp obj) obj) (format "%s" obj)))
 
-(defun memcached-set (state key value &optional expire)
+(cl-defun memcached-set (state key value &optional (expire 0))
   "Set data to server"
-  (memcached-core-set state (memcached--to-string key) (memcached--to-string value) (or expire 0)))
+  (memcached-core-set state (memcached--to-string key) (memcached--to-string value) expire))
 
 (defun memcached-get (state key)
   "Get `key' object."
   (memcached-core-get state (memcached--to-string key)))
+
+(cl-defun memcached-delete (state key &optional (expire 0))
+  "Delete `key' object."
+  (memcached-core-delete state (memcached--to-string key) expire))
 
 (provide 'memcached)
 
