@@ -26,7 +26,7 @@ Set `value` related to `key`. Both `key` and `value` are converted into string. 
 
 #### `(memcached-add state key value &optional (expire 0))`
 
-Add `value` related to `key`.
+Like set, but only stores if the `key` doesn't already exist.
 
 #### `(memcached-get state key)`
 

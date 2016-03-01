@@ -53,7 +53,7 @@
   (memcached-core-set state (memcached--to-string key) (memcached--to-string value) expire))
 
 (cl-defun memcached-add (state key value &optional (expire 0))
-  "Add data related to `key'."
+  "Like set, but only stores if the `key` doesn't already exist."
   (memcached-core-add state (memcached--to-string key) (memcached--to-string value) expire))
 
 (defun memcached-get (state key)
