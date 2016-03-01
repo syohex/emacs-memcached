@@ -49,8 +49,12 @@
   (or (and (stringp obj) obj) (format "%s" obj)))
 
 (cl-defun memcached-set (state key value &optional (expire 0))
-  "Set data to server"
+  "Set data related to `key'. If key-value is already existed, then it is overwritten."
   (memcached-core-set state (memcached--to-string key) (memcached--to-string value) expire))
+
+(cl-defun memcached-add (state key value &optional (expire 0))
+  "Add data related to `key'."
+  (memcached-core-add state (memcached--to-string key) (memcached--to-string value) expire))
 
 (defun memcached-get (state key)
   "Get `key' object."
